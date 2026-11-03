@@ -1,4 +1,3 @@
-
 <h1>Productos de PRESTIGIO</h1>
 
 <?php if (empty($productos)) { ?>
@@ -12,6 +11,9 @@
         <?php foreach ($productos as $producto) { ?>
 
             <div class="producto">
+
+                <img src="img/<?php echo $producto['imagen']; ?>"
+                     alt="<?php echo $producto['nombre']; ?>">
 
                 <h2><?php echo $producto['nombre']; ?></h2>
 

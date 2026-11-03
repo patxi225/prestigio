@@ -7,23 +7,29 @@
     <title>PRESTIGIO — Productos</title>
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 2rem;
-            line-height: 1.5;
-        }
+body {
+    font-family: Arial, sans-serif;
+    margin: 2rem;
+    line-height: 1.5;
+}
 
-        .productos {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
+.productos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
 
-        .producto {
-            border: 1px solid #ccc;
-            padding: 15px;
-            width: 250px;
-        }
+.producto {
+    border: 1px solid #ccc;
+    padding: 15px;
+    width: 250px;
+}
+
+.producto img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
     </style>
 </head>
 
