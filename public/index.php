@@ -1,6 +1,8 @@
 
 <?php
 
+session_start();
+
 require_once __DIR__ . "/../config/parameters.php";
 
 function showError($code, $message)

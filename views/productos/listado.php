@@ -1,4 +1,8 @@
-<h1>Productos de PRESTIGIO</h1>
+
+<h3>NUESTRA CARTA</h3>
+
+<h1>AUTÉNTICA COCINA ITALIANA</h1>
+<p>Tradición, producto y pasión en cada plato.</p>
 
 <?php if (empty($productos)) { ?>
 
@@ -21,9 +25,21 @@
 
                 <p><?php echo $producto['precio']; ?> €</p>
 
+                <form action="index.php?controller=producto&action=addToCart" method="POST">
+
+                    <input type="hidden" name="id" value="<?php echo $producto['id']; ?>">
+
+                    <button type="submit">AÑADIR</button>
+
+                </form>
+
             </div>
 
         <?php } ?>
+
+        <a href="index.php?controller=producto&action=verCarrito">
+            TU CARRITO
+        </a>
 
     </div>
 
