@@ -25,6 +25,10 @@
 
                 <p><?php echo $producto['precio']; ?> €</p>
 
+                <a href="index.php?controller=producto&action=show&id=<?php echo $producto['id']; ?>">
+                    VER DETALLES
+                </a>
+
                 <form action="index.php?controller=producto&action=addToCart" method="POST">
 
                     <input type="hidden" name="id" value="<?php echo $producto['id']; ?>">

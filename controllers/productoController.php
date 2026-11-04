@@ -6,85 +6,175 @@ include_once __DIR__ . "/../models/Producto.php";
 
 class ProductoController
 {
+    private function normalizarCarrito()
+    {
+        if (!isset($_SESSION["carrito"])) {
+            $_SESSION["carrito"] = [];
+        }
+
+        $carritoNuevo = [];
+
+        foreach ($_SESSION["carrito"] as $id => $item) {
+
+            if (is_array($item)) {
+
+                $carritoNuevo[$id] = $item;
+
+            } else {
+
+                $clave = $id . "_";
+
+                $carritoNuevo[$clave] = [
+                    "id" => $id,
+                    "cantidad" => $item,
+                    "ingredientes" => []
+                ];
+
+            }
+
+        }
+
+        $_SESSION["carrito"] = $carritoNuevo;
+    }
+
     public function index()
     {
         $productos = ProductoDAO::getAll();
+
         $view = __DIR__ . "/../views/productos/listado.php";
+
         include_once __DIR__ . "/../views/main.php";
     }
 
     public function addToCart()
     {
-        if (isset($_POST["id"])) {
+        $this->normalizarCarrito();
 
-            $id = $_POST["id"];
+        $id = $_POST["id"];
 
-            $producto = ProductoDAO::getById($id);
+        $ingredientes = [];
 
-            if ($producto) {
-
-                if (!isset($_SESSION["carrito"])) {
-                    $_SESSION["carrito"] = [];
-                }
-
-                if (isset($_SESSION["carrito"][$id])) {
-                    $_SESSION["carrito"][$id]++;
-                } else {
-                    $_SESSION["carrito"][$id] = 1;
-                }
-            }
+        if (isset($_POST["ingredientes"])) {
+            $ingredientes = $_POST["ingredientes"];
         }
 
+        $clave = $id . "_" . implode("-", $ingredientes);
 
-        header("Location: index.php");
+        if (isset($_SESSION["carrito"][$clave])) {
+
+            $_SESSION["carrito"][$clave]["cantidad"]++;
+
+        } else {
+
+            $_SESSION["carrito"][$clave] = [
+                "id" => $id,
+                "cantidad" => 1,
+                "ingredientes" => $ingredientes
+            ];
+
+        }
+
+        header("Location: index.php?controller=producto&action=verCarrito");
         exit;
     }
 
     public function verCarrito()
-{
-    $productos = [];
+    {
+        $this->normalizarCarrito();
 
-    if (isset($_SESSION["carrito"])) {
+        $productos = [];
 
-        foreach ($_SESSION["carrito"] as $id => $cantidad) {
+        foreach ($_SESSION["carrito"] as $item) {
 
-            $producto = ProductoDAO::getById($id);
+            $producto = ProductoDAO::getById($item["id"]);
 
             if ($producto) {
-                $producto["cantidad"] = $cantidad;
+
+                $producto["cantidad"] = $item["cantidad"];
+                $producto["ingredientes"] = $item["ingredientes"];
+
                 $productos[] = $producto;
+
             }
+
         }
+
+        $view = __DIR__ . "/../views/productos/carrito.php";
+
+        include __DIR__ . "/../views/main.php";
     }
 
-
-    $view = __DIR__ . "/../views/productos/carrito.php";
-    include_once __DIR__ . "/../views/main.php";
-}
-
-public function actualizarCantidad()
-{
-    if (isset($_POST["id"]) && isset($_POST["accion"])) {
+    public function actualizarCantidad()
+    {
+        $this->normalizarCarrito();
 
         $id = $_POST["id"];
         $accion = $_POST["accion"];
 
-        if (isset($_SESSION["carrito"][$id])) {
+        $ingredientes = [];
+
+        if (isset($_POST["ingredientes"])) {
+            $ingredientes = $_POST["ingredientes"];
+        }
+
+        $clave = $id . "_" . implode("-", $ingredientes);
+
+        if (isset($_SESSION["carrito"][$clave])) {
 
             if ($accion == "aumentar") {
-                $_SESSION["carrito"][$id]++;
+                $_SESSION["carrito"][$clave]["cantidad"]++;
             }
 
-            if ($accion == "disminuir") {
-
-                if ($_SESSION["carrito"][$id] > 1) {
-                    $_SESSION["carrito"][$id]--;
-                }
+            if ($accion == "disminuir" && $_SESSION["carrito"][$clave]["cantidad"] > 1) {
+                $_SESSION["carrito"][$clave]["cantidad"]--;
             }
+
         }
+
+        header("Location: index.php?controller=producto&action=verCarrito");
+        exit;
     }
 
-    header("Location: index.php?controller=producto&action=verCarrito");
-    exit;
-}
+    public function eliminarDelCarrito()
+    {
+        $this->normalizarCarrito();
+
+        $id = $_POST["id"];
+
+        $ingredientes = [];
+
+        if (isset($_POST["ingredientes"])) {
+            $ingredientes = $_POST["ingredientes"];
+        }
+
+        $clave = $id . "_" . implode("-", $ingredientes);
+
+        if (isset($_SESSION["carrito"][$clave])) {
+            unset($_SESSION["carrito"][$clave]);
+        }
+
+        header("Location: index.php?controller=producto&action=verCarrito");
+        exit;
+    }
+
+    public function show()
+    {
+        $id = $_GET["id"];
+
+        $producto = ProductoDAO::getById($id);
+
+        if ($producto) {
+
+            $ingredientes = ProductoDAO::getIngredientes($id);
+
+            $view = __DIR__ . "/../views/productos/show.php";
+
+            include __DIR__ . "/../views/main.php";
+
+        } else {
+
+            echo "Producto no encontrado.";
+
+        }
+    }
 }

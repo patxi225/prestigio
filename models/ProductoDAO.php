@@ -9,7 +9,7 @@ class ProductoDAO
     {
         global $conexion;
 
-        $sql = "SELECT 
+        $sql = "SELECT
                     productos.id,
                     productos.nombre,
                     productos.descripcion,
@@ -18,7 +18,7 @@ class ProductoDAO
                     categorias.nombre AS categoria
                 FROM productos
                 INNER JOIN categorias
-                ON productos.categoria_id = categorias.id
+                    ON productos.categoria_id = categorias.id
                 WHERE productos.activo = 1";
 
         $consulta = $conexion->query($sql);
@@ -38,5 +38,25 @@ class ProductoDAO
         $consulta->execute(["id" => $id]);
 
         return $consulta->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function getIngredientes($id)
+    {
+        global $conexion;
+
+        $sql = "SELECT
+                    ingredientes.id,
+                    ingredientes.nombre,
+                    ingredientes.precio_extra
+                FROM producto_ingrediente
+                INNER JOIN ingredientes
+                    ON producto_ingrediente.ingrediente_id = ingredientes.id
+                WHERE producto_ingrediente.producto_id = :id
+                AND ingredientes.activo = 1";
+
+        $consulta = $conexion->prepare($sql);
+        $consulta->execute(["id" => $id]);
+
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
 }
