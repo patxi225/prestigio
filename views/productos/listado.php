@@ -1,50 +1,67 @@
 
-<h3>NUESTRA CARTA</h3>
+<section class="encabezado-carta">
 
-<h1>AUTÉNTICA COCINA ITALIANA</h1>
-<p>Tradición, producto y pasión en cada plato.</p>
+    <div class="contenido-encabezado-carta">
 
-<?php if (empty($productos)) { ?>
+        <h3>NUESTRA CARTA</h3>
 
-    <p>No hay productos disponibles.</p>
+        <h1>
+            AUTÉNTICA COCINA<br>
+            ITALIANA
+        </h1>
 
-<?php } else { ?>
+        <p>Tradición, producto y pasión en cada plato.</p>
 
-    <div class="productos">
+    </div>
 
-        <?php foreach ($productos as $producto) { ?>
+</section>
 
-            <div class="producto">
+<section class="contenedor-productos">
 
-                <img src="img/<?php echo $producto['imagen']; ?>"
-                     alt="<?php echo $producto['nombre']; ?>">
+    <?php if (empty($productos)) { ?>
 
-                <h2><?php echo $producto['nombre']; ?></h2>
+        <p>No hay productos disponibles.</p>
 
-                <p><?php echo $producto['descripcion']; ?></p>
+    <?php } else { ?>
 
-                <p><?php echo $producto['precio']; ?> €</p>
+        <div class="productos">
 
-                <a href="index.php?controller=producto&action=show&id=<?php echo $producto['id']; ?>">
-                    VER DETALLES
-                </a>
+            <?php foreach ($productos as $producto) { ?>
 
-                <form action="index.php?controller=producto&action=addToCart" method="POST">
+                <div class="producto">
 
-                    <input type="hidden" name="id" value="<?php echo $producto['id']; ?>">
+                    <img src="img/<?php echo $producto['imagen']; ?>"
+                         alt="<?php echo $producto['nombre']; ?>">
 
-                    <button type="submit">AÑADIR</button>
+                    <h2><?php echo $producto['nombre']; ?></h2>
 
-                </form>
+                    <p><?php echo $producto['descripcion']; ?></p>
 
-            </div>
+                    <p><?php echo $producto['precio']; ?> €</p>
 
-        <?php } ?>
+                    <a href="index.php?controller=producto&action=show&id=<?php echo $producto['id']; ?>">
+                        VER DETALLES
+                    </a>
+
+                    <form action="index.php?controller=producto&action=addToCart" method="POST">
+
+                        <input type="hidden" name="id"
+                               value="<?php echo $producto['id']; ?>">
+
+                        <button type="submit">AÑADIR</button>
+
+                    </form>
+
+                </div>
+
+            <?php } ?>
+
+        </div>
 
         <a href="index.php?controller=producto&action=verCarrito">
             TU CARRITO
         </a>
 
-    </div>
+    <?php } ?>
 
-<?php } ?>
+</section>

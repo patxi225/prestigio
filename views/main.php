@@ -14,10 +14,21 @@
 
     <style>
 
+        @font-face {
+            font-family: 'Lambotype';
+            src: url('/prestigio/fonts/Lambotype-Variable.woff') format('woff');
+            font-weight: 100 900;
+            font-style: normal;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Lambotype', sans-serif;
             margin: 0;
             line-height: 1.5;
+        }
+
+        h1 {
+            font-variation-settings: 'wght' 477, 'wdth' 50;
         }
 
         /* HEADER */
@@ -96,6 +107,80 @@
             height: 180px;
             object-fit: cover;
         }
+
+        /* ENCABEZADO DE LA CARTA */
+
+        
+        .encabezado-carta {
+            width: 100%;
+            height: 400px;
+            background: url('/prestigio/img/fondo-menu.png') center center / cover no-repeat;
+            display: flex;
+            align-items: center;
+            padding: 0 8%;
+            box-sizing: border-box;
+        }
+
+        .contenido-encabezado-carta {
+            max-width: 550px;
+        }
+
+        .encabezado-carta h3 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #917300;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .encabezado-carta h3::before,
+        .encabezado-carta h3::after {
+            content: "";
+            width: 45px;
+            height: 1px;
+            background-color: #917300;
+        }
+
+        .encabezado-carta h1 {
+            color: #202020;
+            font-size: 65px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .encabezado-carta p {
+            color: #202020;
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .contenedor-productos {
+            padding: 50px 5%;
+        }
+
+        @media (max-width: 768px) {
+
+            .encabezado-carta {
+                height: 250px;
+                padding: 0 6%;
+                background-position: center;
+            }
+
+            .encabezado-carta h1 {
+                font-size: 32px;
+            }
+
+            .encabezado-carta h3 {
+                font-size: 13px;
+            }
+
+            .encabezado-carta p {
+                font-size: 13px;
+            }
+
+        }
+
 
     </style>
 
