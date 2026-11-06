@@ -74,66 +74,89 @@ class ProductoController
 
         }
 
-        header("Location: index.php?controller=producto&action=verCarrito");
+        header("Location: index.php?controller=producto&action=index");
         exit;
     }
 
-    public function verCarrito()
-    {
-        $this->normalizarCarrito();
 
-        $productos = [];
+public function verCarrito()
+{
+    $this->normalizarCarrito();
 
-        foreach ($_SESSION["carrito"] as $item) {
+    $productos = [];
+    $total = 0;
 
-            $producto = ProductoDAO::getById($item["id"]);
+    foreach ($_SESSION["carrito"] as $item) {
 
-            if ($producto) {
+        $producto = ProductoDAO::getById($item["id"]);
 
-                $producto["cantidad"] = $item["cantidad"];
-                $producto["ingredientes"] = $item["ingredientes"];
+        if ($producto) {
 
-                $productos[] = $producto;
+            $producto->cantidad = $item["cantidad"];
+            $producto->ingredientes = $item["ingredientes"];
 
+            $producto->precioIngredientes = 0;
+            $producto->ingredientesSeleccionados = [];
+
+            foreach ($item["ingredientes"] as $id) {
+
+                global $conexion;
+
+                $consulta = $conexion->prepare(
+                    "SELECT * FROM ingredientes WHERE id = :id"
+                );
+
+                $consulta->execute(["id" => $id]);
+
+                $ingrediente = $consulta->fetchObject();
+
+                if ($ingrediente) {
+                    $producto->precioIngredientes += $ingrediente->precio_extra;
+                    $producto->ingredientesSeleccionados[] = $ingrediente;
+                }
             }
 
+            $producto->precioUnidad = $producto->precio + $producto->precioIngredientes;
+            $producto->subtotal = $producto->precioUnidad * $producto->cantidad;
+
+            $total += $producto->subtotal;
+
+            $productos[] = $producto;
         }
-
-        $view = __DIR__ . "/../views/productos/carrito.php";
-
-        include __DIR__ . "/../views/main.php";
     }
 
-    public function actualizarCantidad()
-    {
-        $this->normalizarCarrito();
+    $view = __DIR__ . "/../views/productos/carrito.php";
 
-        $id = $_POST["id"];
-        $accion = $_POST["accion"];
+    include __DIR__ . "/../views/main.php";
+}
 
-        $ingredientes = [];
 
-        if (isset($_POST["ingredientes"])) {
-            $ingredientes = $_POST["ingredientes"];
-        }
+public function actualizarCantidad()
+{
+    $this->normalizarCarrito();
 
-        $clave = $id . "_" . implode("-", $ingredientes);
+    $id = $_POST["id"];
+    $accion = $_POST["accion"];
 
-        if (isset($_SESSION["carrito"][$clave])) {
+    $ingredientes = $_POST["ingredientes"] ?? [];
 
-            if ($accion == "aumentar") {
-                $_SESSION["carrito"][$clave]["cantidad"]++;
-            }
+    $clave = $id . "_" . implode("-", $ingredientes);
 
-            if ($accion == "disminuir" && $_SESSION["carrito"][$clave]["cantidad"] > 1) {
+    if (isset($_SESSION["carrito"][$clave])) {
+
+        if ($accion == "aumentar") {
+            $_SESSION["carrito"][$clave]["cantidad"]++;
+        } else if ($accion == "disminuir") {
+
+            if ($_SESSION["carrito"][$clave]["cantidad"] > 1) {
                 $_SESSION["carrito"][$clave]["cantidad"]--;
             }
-
         }
-
-        header("Location: index.php?controller=producto&action=verCarrito");
-        exit;
     }
+
+    header("Location: index.php?controller=producto&action=verCarrito");
+    exit;
+}
 
     public function eliminarDelCarrito()
     {

@@ -1,8 +1,4 @@
 
-<?php
-require_once __DIR__ . "/../../config/dataBase.php";
-global $conexion;
-?>
 
 <h1>TU CARRITO</h1>
 
@@ -19,73 +15,47 @@ global $conexion;
 
         foreach ($productos as $producto) {
 
-            $precioIngredientes = 0;
-            $ingredientesSeleccionados = [];
 
-            foreach ($producto["ingredientes"] as $idIngrediente) {
-
-                $consulta = $conexion->prepare(
-                    "SELECT nombre, precio_extra
-                     FROM ingredientes
-                     WHERE id = :id"
-                );
-
-                $consulta->execute(["id" => $idIngrediente]);
-
-                $ingrediente = $consulta->fetch(PDO::FETCH_ASSOC);
-
-                if ($ingrediente) {
-                    $precioIngredientes += $ingrediente["precio_extra"];
-                    $ingredientesSeleccionados[] = $ingrediente;
-                }
-            }
-
-            $precioUnidad = $producto["precio"] + $precioIngredientes;
-
-            $subtotal = $precioUnidad * $producto["cantidad"];
+            $subtotal = $precioUnidad * $producto->cantidad;
 
             $total += $subtotal;
         ?>
 
             <div class="producto">
 
-                <img src="img/<?php echo $producto['imagen']; ?>"
-                     alt="<?php echo $producto['nombre']; ?>">
+                <img src="img/<?php echo $producto->imagen; ?>"
+                     alt="<?php echo $producto->nombre; ?>">
 
-                <h2><?php echo $producto["nombre"]; ?></h2>
-
-                <p>Precio del plato:
-                    <?php echo number_format($producto["precio"], 2, ',', '.'); ?> €
-                </p>
+                <h2><?php echo $producto->nombre; ?></h2>
 
                 <?php if (!empty($ingredientesSeleccionados)) { ?>
 
-                    <p>Ingredientes adicionales:</p>
+                    <p>Ingredientes extra:</p>
 
                     <?php foreach ($ingredientesSeleccionados as $ingrediente) { ?>
 
                         <p>
-                            <?php echo $ingrediente["nombre"]; ?>
-                            (+<?php echo number_format($ingrediente["precio_extra"], 2, ',', '.'); ?> €)
+                            <?php echo $ingrediente->nombre; ?>
+                            +<?php echo number_format($ingrediente->precio_extra, 2, ',', '.'); ?> €
                         </p>
 
                     <?php } ?>
 
-                    <p>Precio de los adicionales:
+                    <p>Precio de los extras:
                         <?php echo number_format($precioIngredientes, 2, ',', '.'); ?> €
                     </p>
 
                 <?php } ?>
 
-                <p>Precio por unidad:
+                <p>Precio del plato:
                     <?php echo number_format($precioUnidad, 2, ',', '.'); ?> €
                 </p>
 
                 <form action="index.php?controller=producto&action=actualizarCantidad" method="POST">
 
-                    <input type="hidden" name="id" value="<?php echo $producto['id']; ?>">
+                    <input type="hidden" name="id" value="<?php echo $producto->id; ?>">
 
-                    <?php foreach ($producto["ingredientes"] as $idIngrediente) { ?>
+                    <?php foreach ($producto->ingredientes as $idIngrediente) { ?>
 
                         <input type="hidden" name="ingredientes[]" value="<?php echo $idIngrediente; ?>">
 
@@ -93,7 +63,7 @@ global $conexion;
 
                     <button type="submit" name="accion" value="disminuir">−</button>
 
-                    <span><?php echo $producto["cantidad"]; ?></span>
+                    <span><?php echo $producto->cantidad; ?></span>
 
                     <button type="submit" name="accion" value="aumentar">+</button>
 
@@ -101,9 +71,9 @@ global $conexion;
 
                 <form action="index.php?controller=producto&action=eliminarDelCarrito" method="POST">
 
-                    <input type="hidden" name="id" value="<?php echo $producto['id']; ?>">
+                    <input type="hidden" name="id" value="<?php echo $producto->id; ?>">
 
-                    <?php foreach ($producto["ingredientes"] as $idIngrediente) { ?>
+                    <?php foreach ($producto->ingredientes as $idIngrediente) { ?>
 
                         <input type="hidden" name="ingredientes[]" value="<?php echo $idIngrediente; ?>">
 
@@ -113,7 +83,7 @@ global $conexion;
 
                 </form>
 
-                <p>Subtotal:
+                <p>Total:
                     <?php echo number_format($subtotal, 2, ',', '.'); ?> €
                 </p>
 

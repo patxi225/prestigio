@@ -23,7 +23,7 @@ class ProductoDAO
 
         $consulta = $conexion->query($sql);
 
-        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return $consulta->fetchAll(PDO::FETCH_OBJ);
     }
 
     public static function getById($id)
@@ -37,7 +37,7 @@ class ProductoDAO
         $consulta = $conexion->prepare($sql);
         $consulta->execute(["id" => $id]);
 
-        return $consulta->fetch(PDO::FETCH_ASSOC);
+        return $consulta->fetchObject();
     }
 
     public static function getIngredientes($id)
@@ -57,6 +57,6 @@ class ProductoDAO
         $consulta = $conexion->prepare($sql);
         $consulta->execute(["id" => $id]);
 
-        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return $consulta->fetchAll(PDO::FETCH_OBJ);
     }
 }
