@@ -9,7 +9,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/estilos.css?v2">
+    <link rel="stylesheet" href="css/estilos.css?v3">
 </head>
 
 <body>
