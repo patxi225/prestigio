@@ -37,14 +37,16 @@ class ProductoController
         $_SESSION["carrito"] = $carritoNuevo;
     }
 
-    public function index()
-    {
-        $productos = ProductoDAO::getAll();
+public function index()
+{
+    $productos = ProductoDAO::getAll();
 
-        $view = __DIR__ . "/../views/productos/listado.php";
+    $categorias = [1 => "ENTRANTES", 2 => "PRIMEROS", 3 => "SEGUNDOS", 4 => "POSTRES" ];
 
-        include_once __DIR__ . "/../views/main.php";
-    }
+    $view = __DIR__ . "/../views/productos/listado.php";
+
+    include_once __DIR__ . "/../views/main.php";
+}
 
     public function addToCart()
     {

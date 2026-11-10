@@ -5,26 +5,28 @@ require_once __DIR__ . "/../config/dataBase.php";
 
 class ProductoDAO
 {
-    public static function getAll()
-    {
-        global $conexion;
+public static function getAll()
+{
+    global $conexion;
 
-        $sql = "SELECT
-                    productos.id,
-                    productos.nombre,
-                    productos.descripcion,
-                    productos.precio,
-                    productos.imagen,
-                    categorias.nombre AS categoria
-                FROM productos
-                INNER JOIN categorias
-                    ON productos.categoria_id = categorias.id
-                WHERE productos.activo = 1";
+    $sql = "SELECT
+                productos.id,
+                productos.categoria_id,
+                productos.nombre,
+                productos.descripcion,
+                productos.precio,
+                productos.imagen,
+                categorias.nombre AS categoria
+            FROM productos
+            INNER JOIN categorias
+                ON productos.categoria_id = categorias.id
+            WHERE productos.activo = 1
+            ORDER BY productos.id";
 
-        $consulta = $conexion->query($sql);
+    $consulta = $conexion->query($sql);
 
-        return $consulta->fetchAll(PDO::FETCH_OBJ);
-    }
+    return $consulta->fetchAll(PDO::FETCH_OBJ);
+}
 
     public static function getById($id)
     {

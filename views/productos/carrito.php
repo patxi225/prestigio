@@ -16,8 +16,7 @@
         foreach ($productos as $producto) {
 
 
-            $subtotal = $precioUnidad * $producto->cantidad;
-
+$subtotal = $producto->precioUnidad * $producto->cantidad;
             $total += $subtotal;
         ?>
 
@@ -28,12 +27,10 @@
 
                 <h2><?php echo $producto->nombre; ?></h2>
 
-                <?php if (!empty($ingredientesSeleccionados)) { ?>
-
+             <?php if (!empty($producto->ingredientesSeleccionados)) { ?>
                     <p>Ingredientes extra:</p>
-
-                    <?php foreach ($ingredientesSeleccionados as $ingrediente) { ?>
-
+    
+                <?php foreach ($producto->ingredientesSeleccionados as $ingrediente) { ?>
                         <p>
                             <?php echo $ingrediente->nombre; ?>
                             +<?php echo number_format($ingrediente->precio_extra, 2, ',', '.'); ?> €
@@ -42,14 +39,12 @@
                     <?php } ?>
 
                     <p>Precio de los extras:
-                        <?php echo number_format($precioIngredientes, 2, ',', '.'); ?> €
-                    </p>
+                        <?php echo number_format($producto->precioIngredientes, 2, ',', '.'); ?>                    </p>
 
                 <?php } ?>
 
                 <p>Precio del plato:
-                    <?php echo number_format($precioUnidad, 2, ',', '.'); ?> €
-                </p>
+                    <?php echo number_format($producto->precioUnidad, 2, ',', '.'); ?> €                </p>
 
                 <form action="index.php?controller=producto&action=actualizarCantidad" method="POST">
 

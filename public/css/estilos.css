@@ -15,6 +15,11 @@ h1 {
     font-weight: 500;
 }
 
+main {
+        padding-top: 90px;
+
+}
+
 
 /* HEADER */
 
@@ -25,6 +30,9 @@ h1 {
     display: flex;
     align-items: center;
     padding: 0 4%;
+        position: fixed;
+            width: 100%;
+
 }
 
 .header-contenido {
@@ -122,6 +130,9 @@ h1 {
 
 .producto {
 
+        width: 95%;
+    margin: 0 auto;
+
     padding: 20px;
     border-bottom: 1px solid #7D7D7D;
         font-variation-settings: "wght" 718, "wdth" 63;
@@ -135,6 +146,7 @@ h1 {
     width: 100%;
     height: 120px;
     object-fit: cover;
+    padding-left: 5%;
 }
 
 .producto h2 {
@@ -185,10 +197,14 @@ h1 {
 }
 
 
-.redes-sociales a {
-    display: inline-block;
-    font-size: 18px;
-    margin-right: 10px;
+.redes-sociales {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.redes-sociales img {
+    width: 25px;
 }
 
 
@@ -207,6 +223,12 @@ h1 {
     font-size: 13px;
     text-align: center;
 }
+.boton-anadir:hover {
+    background-color: #7D7D7D;
+    color: white;
+    border-color: black;
+}
+
 
 
 
@@ -225,3 +247,69 @@ h1 {
     margin-right: 30px;
 }
 
+
+.boton-detalles:hover {
+    background-color: #917300;
+    color: white;
+    border-color: #917300;
+}
+
+
+.boton-carrito {
+    width: 80%;
+    margin: 40px auto;
+    text-align: center;
+        border-radius: 5%;
+
+}
+
+
+
+.boton-carrito a {
+    display: block;
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 22px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+        font-family: 'Lambotype';
+    font-variation-settings: "wght" 718, "wdth" 63;
+}
+
+
+.numero-producto{
+        color: #917300;
+
+    font-size: 22px;
+}
+
+.titulo-categoria {
+    font-family: 'Lambotype';
+    font-variation-settings: "wght" 718, "wdth" 63;
+    font-size: 36px;
+    padding: 15px 1% 10px;
+    margin: 10px auto;
+    width: 90%;
+}
+
+.menu-categorias {
+    width: 80%;
+    margin: 20px auto;
+    text-align: right;
+}
+
+.menu-categorias a {
+    text-decoration: none;
+    font-size: 20px;
+    margin-left: 15px;
+    font-family: 'Lambotype';
+    font-variation-settings: "wght" 718, "wdth" 63;
+    color: #202020;
+}
+
+.menu-categorias a:hover {
+    color: #917300;
+}

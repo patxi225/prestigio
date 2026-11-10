@@ -5,35 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PRESTIGIO — Cocina Italiana</title>
+    <title>PRESTIGIO</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/estilos.css?v3">
+    <link rel="stylesheet" href="css/estilos.css?v7">
 </head>
 
 <body>
-
     <header class="header">
 
+
+
         <div class="header-contenido">
+
 
             <a href="index.php?controller=producto&action=index" class="header-menu">
                 <span class="icono-menu">☰</span>
                 <span>MENÚ</span>
             </a>
-
             <div class="header-logo">
                 <a href="inicio.html">
                     <img src="img/logo-prestigio.png" alt="PRESTIGIO">
                 </a>
             </div>
-
             <div class="header-carrito">
                 <a href="index.php?controller=producto&action=verCarrito">
                     <img src="img/carrito.svg" alt="Carrito">
                 </a>
             </div>
+
+
 
         </div>
 
@@ -43,7 +45,6 @@
         <?php include_once $view; ?>
     </main>
 
-    <!-- FOOTER -->
 
     <footer class="footer">
 
@@ -76,10 +77,10 @@
                     <h3>SÍGUENOS</h3>
 
                     <div class="redes-sociales">
-                        <a href="#">Instagram</a>
-                        <a href="#">Facebook</a>
-                        <a href="#">YouTube</a>
-                        <a href="#">TikTok</a>
+                        <a href="#"><img src="img/instagram.svg" alt=""></a>
+                        <a href="#"><img src="img/facebook.svg" alt=""></a>
+                        <a href="#"><img src="img/youtube.svg" alt=""></a>
+                        <a href="#"><img src="img/tiktok.svg" alt=""></a>
                     </div>
 
                     <div class="direccion-footer">
