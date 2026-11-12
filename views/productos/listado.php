@@ -99,7 +99,7 @@
 
     <div class="boton-carrito">
         <a href="index.php?controller=producto&action=verCarrito">
-            TU CARRITO
+            VER TU CARRITO
         </a>
     </div>
 

@@ -1,0 +1,98 @@
+
+@font-face {
+    font-family: 'Lambotype';
+    src: url('/prestigio/fonts/Lambotype-Variable.woff');
+}
+
+body {
+    margin: 0;
+    background-color: black;
+    color: white;
+    font-family: 'Lambotype';
+}
+
+main {
+    padding-top: 90px;
+}
+
+/* TITULO */
+
+h1 {
+    color: #FFFFFF;
+ font-size: 110px;
+ margin-bottom: 12px;
+ font-variation-settings: "wdth" 4, "wght" 787;
+ font-weight: bold;
+    border-bottom: 1px solid #999;
+        width: 85%;
+            margin: 0 auto;
+
+
+}
+
+/* PRODUCTOS */
+
+.productos {
+    width: 90%;
+}
+
+.producto {
+    padding: 25px 0;
+    border-bottom: 1px solid #555;
+    align-items: center;
+}
+
+.producto img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+
+.producto h2 {
+    font-size: 38px;
+}
+
+.producto p {
+    color: #999;
+    font-size: 20px;
+}
+
+/* BOTONES */
+
+.producto button,
+.producto span {
+    background-color: black;
+    color: white;
+    border: 1px solid #999;
+    padding: 8px;
+    cursor: pointer;
+}
+
+/* PRECIO */
+
+.producto .col-1 p {
+    color: #ffcc00;
+    font-size: 28px;
+}
+
+/* TOTAL */
+
+main > h2 {
+    width: 90%;
+    margin: 25px auto;
+    color: #ffcc00;
+    text-align: right;
+    font-size: 35px;
+}
+
+/* FINALIZAR */
+
+main > button {
+    display: block;
+    width: 90%;
+    margin: 30px auto;
+    padding: 15px;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}

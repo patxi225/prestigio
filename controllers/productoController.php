@@ -76,7 +76,7 @@ public function index()
 
         }
 
-        header("Location: index.php?controller=producto&action=index");
+header("Location: index.php?controller=producto&action=verCarrito");
         exit;
     }
 

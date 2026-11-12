@@ -9,7 +9,14 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/estilos.css?v7">
+    <link rel="stylesheet" href="css/estilos.css?v8">
+
+
+    <!-- para cargar el css del carrito -->
+    <?php if (isset($_GET["action"]) && $_GET["action"] == "verCarrito") { ?>
+    <link rel="stylesheet" href="css/carrito.css?v2">
+<?php } ?>
+
 </head>
 
 <body>
