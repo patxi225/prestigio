@@ -42,3 +42,35 @@
 .texto-portada img {
     width: 18px;
 }
+
+.seleccion-chef {
+    padding: 50px 6%;
+}
+
+.texto-chef {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.texto-chef h2 {
+    font-size: 32px;
+    margin: 0;
+            font-variation-settings: "wdth" 66;
+
+}
+
+.texto-chef h3 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    font-size: 12px;
+    margin: 0;
+    padding-bottom: 20px;
+    border-bottom: 2px solid black;
+}
+
+.texto-chef h3 img {
+    width: 18px;
+}
