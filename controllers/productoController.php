@@ -6,6 +6,15 @@ include_once __DIR__ . "/../models/Producto.php";
 
 class ProductoController
 {
+
+
+        public function home()
+        {
+            $view = __DIR__ . "/../views/productos/home.php";
+
+            include_once __DIR__ . "/../views/main.php";
+        }
+
     private function normalizarCarrito()
     {
         if (!isset($_SESSION["carrito"])) {

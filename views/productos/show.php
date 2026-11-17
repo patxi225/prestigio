@@ -1,5 +1,5 @@
 
-<h1>Detalle del producto</h1>
+<h1>DETALLES PRODUCTO</h1>
 
 <p>
     <a href="index.php">Volver a la carta</a>
@@ -7,15 +7,15 @@
 
 <div class="detalle-producto">
 
-    <img src="img/<?php echo $producto->imagen; ?>" alt="<?php echo htmlspecialchars($producto->nombre, ENT_QUOTES, 'UTF-8'); ?>">
+<img src="img/<?php echo $producto->imagen; ?>" alt="<?php echo $producto->nombre; ?>">
 
-    <h2>
-        <?php echo htmlspecialchars($producto->nombre, ENT_QUOTES, 'UTF-8'); ?>
-    </h2>
+<h2>
+    <?php echo $producto->nombre; ?>
+</h2>
 
-    <p>
-        <?php echo htmlspecialchars($producto->descripcion, ENT_QUOTES, 'UTF-8'); ?>
-    </p>
+<p>
+    <?php echo $producto->descripcion; ?>
+</p>
 
     <p>
         <strong>Precio:</strong>

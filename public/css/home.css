@@ -1,0 +1,44 @@
+.portada-home {
+    height: 550px;
+    background-image: url('/prestigio/img/fondohome.webp');
+    background-position: center;
+    background-size: cover;
+    position: relative;
+        font-family: 'Lambotype', sans-serif;
+
+}
+
+.texto-portada {
+    position: absolute;
+    top: 20%;
+    left: 8%;
+    color: white;
+}
+
+.texto-portada h3 {
+    font-size: 36px;
+        font-variation-settings: "wdth" 66;
+
+}
+
+.texto-portada h1 {
+    font-size: 90px;
+    font-variation-settings: "wdth" 4, "wght" 787;
+}
+
+.texto-portada a {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    font-size: 14px;
+        font-variation-settings: "wdth" 34, "wght" 608;
+
+}
+
+.texto-portada img {
+    width: 18px;
+}

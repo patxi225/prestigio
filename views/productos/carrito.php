@@ -25,7 +25,7 @@
                          alt="<?php echo $producto->nombre; ?>">
                 </div>
 
-                <div class="col-5">
+                <div class="col-4">
 
                     <h2><?php echo $producto->nombre; ?></h2>
 
@@ -68,31 +68,38 @@
 
                         <?php } ?>
 
-                        <button type="submit" name="accion" value="disminuir">−</button>
+                        <button type="submit" name="accion" value="">−</button>
 
                         <span><?php echo $producto->cantidad; ?></span>
 
-                        <button type="submit" name="accion" value="aumentar">+</button>
+                        <button type="submit" name="accion" value="">+</button>
 
                     </form>
 
                 </div>
 
-                <div class="col-1">
+                <div class="col-2">
 
-                    <form action="index.php?controller=producto&action=eliminarDelCarrito" method="POST">
+                    <div class="botones-producto">
 
-                        <input type="hidden" name="id" value="<?php echo $producto->id; ?>">
+                        <a href="index.php?controller=producto&action=show&id=<?php echo $producto->id; ?>"
+                        class="botondecarrito">
+                            DETALLES
+                        </a>
 
-                        <?php foreach ($producto->ingredientes as $idIngrediente) { ?>
+                        <form action="index.php?controller=producto&action=eliminarDelCarrito" method="POST">
 
-                            <input type="hidden" name="ingredientes[]" value="<?php echo $idIngrediente; ?>">
+                            <input type="hidden" name="id" value="<?php echo $producto->id; ?>">
 
-                        <?php } ?>
+                            <?php foreach ($producto->ingredientes as $idIngrediente) { ?>
+                                <input type="hidden" name="ingredientes[]" value="<?php echo $idIngrediente; ?>">
+                            <?php } ?>
 
-                        <button type="submit">ELIMINAR</button>
+                            <button type="submit" class="botondecarrito">ELIMINAR</button>
 
-                    </form>
+                        </form>
+
+                    </div>
 
                 </div>
 
@@ -112,6 +119,10 @@
 
     <h2>Total: <?php echo number_format($total, 2, ',', '.'); ?> €</h2>
 
-    <button type="button">FINALIZAR COMPRA</button>
+    <button type="button" class="finalizar-carrito">FINALIZAR COMPRA</button>
+
+    <a href="index.php?controller=producto&action=index" class="seguir-comprando">
+    Seguir explorando la carta
+    </a>
 
 <?php } ?>
